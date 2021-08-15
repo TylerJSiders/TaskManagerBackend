@@ -30,6 +30,7 @@ namespace TaskManagerAPI
         {
             services.AddDbContext<TaskContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TaskManagerConn")));
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskManagerAPI", Version = "v1" });
@@ -49,7 +50,19 @@ namespace TaskManagerAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
+
+            app.UseCors(builder => builder
+
+                .AllowAnyHeader()
+
+                .AllowAnyMethod()
+
+                .SetIsOriginAllowed((host) => true)
+
+                .AllowCredentials()
+
+            );
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
