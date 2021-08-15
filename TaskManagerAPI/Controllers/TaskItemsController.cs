@@ -9,7 +9,7 @@ using TaskManagerAPI.Models;
 
 namespace TaskManagerAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("Task")]
     [ApiController]
     public class TaskItemsController : ControllerBase
     {
